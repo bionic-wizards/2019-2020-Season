@@ -1,0 +1,74 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+
+public class Robothardware
+{
+//instantiate motors and servos
+    public DcMotor frontleft;
+    public DcMotor backleft;
+    public DcMotor frontright;
+    public DcMotor backright;
+    public DcMotor liftarm;
+    public Servo spin;
+    public ModernRoboticsI2cColorSensor frontColorSensor = null; 
+        public Servo grab;
+    
+    public Servo BG01;
+    public Servo BG02;
+
+    //creating the hardware map
+    HardwareMap hardwareMap;
+
+    public void init(HardwareMap hardwareMap) {
+     
+
+        // Define Motors
+        frontleft = hardwareMap.get(DcMotor.class,"motor1");
+        backleft = hardwareMap.get(DcMotor.class, "motor2");
+        frontright = hardwareMap.get(DcMotor.class, "motor3");
+        backright = hardwareMap.get(DcMotor.class, "motor4");
+        liftarm = hardwareMap.get(DcMotor.class, "motor5");
+        spin = hardwareMap.get(Servo.class, "spin");
+        grab = hardwareMap.get(Servo.class, "grab");
+       
+      BG01 =hardwareMap.get(Servo.class,"BG01");
+        BG02 =hardwareMap.get(Servo.class,"BG01");
+
+       
+        // put what you want motors and servos to do in intilization here 
+            frontleft.setPower(0);
+            backleft.setPower(0);
+            frontright.setPower(0);
+            backright.setPower(0);
+            liftarm.setPower(0);
+    spin.setPosition(0);
+     grab.setPosition(0.2);
+
+     BG02.setPosition(.78);
+        // Set all motors to run without encoders.
+        
+        frontleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);  //...RunMode.RUN_TO_POSITION
+        backleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        liftarm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        
+        frontColorSensor = hardwareMap.get(ModernRoboticsI2cColorSensor.class, "CS");
+
+        //Setting motors 0 power behavior 
+        frontleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //...ZeroPowerBehavior.FLOAT
+        backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftarm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        
+    }
+ }
